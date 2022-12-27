@@ -50,5 +50,59 @@ namespace AddressBook_UC7_UC11
             AddressBook address = new AddressBook();
             address.DisplayContact(ContactArray, Contact);
         }
+        public void EditContact()
+        {
+            int i = 0;
+            Console.WriteLine("Enter First Name to Edit");
+            string FirstName = Console.ReadLine();
+            while (ContactArray[i].FirstName != FirstName)
+            {
+                i++;
+            }
+            Console.WriteLine("Enter field to be Modify\n1.FirstName\n2.LastName\n3.Address\n4.State\n5.Zip\n6.PhoneNumber\n7.Email");
+            int Option = Convert.ToInt32(Console.ReadLine());
+            switch (Option)
+            {
+                case 1:
+                    Console.WriteLine("Enter Modify Value");
+                    string firstnmae = Console.ReadLine();
+                    ContactArray[i].FirstName = firstnmae; 
+                    break;
+                case 2:
+                    Console.WriteLine("Enter Modify Value");
+                    string lastname = Console.ReadLine();
+                    ContactArray[i].LastName = lastname; 
+                    break;
+                case 3:
+                    Console.WriteLine("Enter Modify Value");
+                    string address = Console.ReadLine();
+                    ContactArray[i].Address = address; 
+                    break;
+                case 4:
+                    Console.WriteLine("Enter Modify Value");
+                    string state = Console.ReadLine();
+                    ContactArray[i].State = state; 
+                    break;
+                case 5:
+                    Console.WriteLine("Enter Modify Value");
+                    int zip = Convert.ToInt32(Console.ReadLine());
+                    ContactArray[i].Zip = zip; 
+                    break;
+                case 6:
+                    Console.WriteLine("Enter Modify Value");
+                    long phonenumber = Convert.ToInt64(Console.ReadLine());
+                    ContactArray[i].PhoneNumber = phonenumber; 
+                    break;
+                case 7:
+                    Console.WriteLine("Enter Modify Value");
+                    string email = Console.ReadLine();
+                    ContactArray[i].Email = email; 
+                    break;
+
+            }
+            AddressBook Edit = new AddressBook();
+            Edit.DisplayContact(ContactArray, Contact);
+             
+        }
     }
 }

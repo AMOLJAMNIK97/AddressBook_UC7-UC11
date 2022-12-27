@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,12 @@ namespace AddressBook_UC7_UC11
                 Add.CreatContact(FirstName, LastName, Addreess, State, Zip, PhoneNumber, Email);
                 Contact--;
 
+            }
+            Console.WriteLine("Do you want to Modify(Y/N)");
+            char ch = Convert.ToChar(Console.ReadLine());
+            if (ch == 'Y' || ch == 'y')
+            {
+                Add.EditContact();
             }
             /*AddressBook Contact = new AddressBook("Amol", "Jamnik", "Akola","Maharashtra", 444401, 8380804110, "ajamnik.mech@gmail.com");
             Contact.DisplayContact();*/
