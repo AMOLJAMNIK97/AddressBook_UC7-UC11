@@ -15,6 +15,12 @@ namespace AddressBook_UC7_UC11
         public int Zip { get; set; }
         public long PhoneNumber { get; set; }
         public string Email { get; set; }
+        public AddressBook[] ContactArray { get; set; }
+        public int Contact = 0;
+        public AddressBook()
+        {
+            this.ContactArray = new AddressBook[5];
+        }
         public AddressBook(string firstName, string lastName, string address, string state, int zip, long phoneNumber, string email)
         {
             FirstName = firstName;
@@ -25,14 +31,24 @@ namespace AddressBook_UC7_UC11
             PhoneNumber = phoneNumber;
             Email = email;
         }   
-        public void DisplayContact()
+        public void DisplayContact(AddressBook[] ContactArray,int n)
         {
-            Console.WriteLine("Nmae :{0} {1}", FirstName, LastName);
-            Console.WriteLine("Address :{0}", Address);
-            Console.WriteLine("State :{0} ", State);
-            Console.WriteLine("Email :{0} ", Email);
-            Console.WriteLine("Zip :{0}", Zip);
-            Console.WriteLine("PhoneNumber :{0} ", PhoneNumber);
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Nmae {0} {1}", ContactArray[i].FirstName, ContactArray[i].LastName);
+                Console.WriteLine("Address :{0}", ContactArray[i].Address);
+                Console.WriteLine("State :{0} ", ContactArray[i].State);
+                Console.WriteLine("Email :{0} ", ContactArray[i].Email);
+                Console.WriteLine("Zip :{0}", ContactArray[i].Zip);
+                Console.WriteLine("PhoneNumber :{0} ", ContactArray[i].PhoneNumber);
+            }
+        }
+        public void CreatContact(string FirstNmae,string LastName,string Address,string State,int Zip,long PhoneNumber,string Email)
+        {
+            ContactArray[this.Contact] = new AddressBook(FirstName, LastName, Address, State, Zip, PhoneNumber, Email);
+            Contact++;
+            AddressBook address = new AddressBook();
+            address.DisplayContact(ContactArray, Contact);
         }
     }
 }
