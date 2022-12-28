@@ -9,20 +9,14 @@ namespace AddressBook_UC7_UC11
     public class AddressBook:IContact
     {
 
+
         public Dictionary<string, Contact> addressBook = new Dictionary<string, Contact>();
         public Dictionary<string, AddressBook> addressBookDictionary = new Dictionary<string, AddressBook>();
 
         public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber, string BookName)
         {
-            Contact contact = new Contact();
-            contact.FirstName = firstName;
-            contact.LastName = lastName;
-            contact.Address = address;
-            contact.City = city;
-            contact.State = state;
-            contact.Zip = zip;
-            contact.Email = email;
-            contact.PhoneNumber  = phoneNumber;
+            Contact contact = new Contact(firstName, lastName, address, city, state, email, zip, phoneNumber);
+
             addressBookDictionary[BookName].addressBook.Add(contact.FirstName, contact);
             Console.WriteLine("Added Succesfully");
 
@@ -140,6 +134,25 @@ namespace AddressBook_UC7_UC11
         public Dictionary<string, AddressBook> GetaddressBook()
         {
             return addressBookDictionary;
+        }
+        public List<Contact> GetListOfDictionaryKeys(string bookName)
+        {
+            List<Contact> contacts = new List<Contact>();
+            foreach (var value in addressBookDictionary[bookName].addressBook.Values)
+            {
+                contacts.Add(value);
+            }
+            return contacts;
+        }
+        public bool CheckDuplicateEntry(Contact check, string bookName)
+        {
+            List<Contact> contacts = GetListOfDictionaryKeys(bookName);
+            if (contacts.Any(b => b.Equals(check)))
+            {
+                Console.WriteLine("Name Already Exist");
+                return true;
+            }
+            return false;
         }
     }
 }
