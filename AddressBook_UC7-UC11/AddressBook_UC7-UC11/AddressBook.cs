@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace AddressBook_UC7_UC11
 {
-    public class AddressBook:IContact
+    public class AddressBook : IContact
     {
-
 
         public Dictionary<string, Contact> addressBook = new Dictionary<string, Contact>();
         public Dictionary<string, AddressBook> addressBookDictionary = new Dictionary<string, AddressBook>();
+
+        public Dictionary<string, Contact> cityDictionary = new Dictionary<string, Contact>();
+        public Dictionary<string, Contact> stateDictionary = new Dictionary<string, Contact>();
 
         public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber, string BookName)
         {
@@ -154,5 +156,67 @@ namespace AddressBook_UC7_UC11
             }
             return false;
         }
+        public List<Contact> GetListOfDictionaryKeys(Dictionary<string, Contact> cityDictionary)
+        {
+            List<Contact> contacts = new List<Contact>();
+            foreach(var value in cityDictionary.Values)
+            {
+                contacts.Add(value);
+            }
+            return contacts;
+        }
+        public void SearchPersonByCity(string city)
+        {
+            foreach (AddressBook addressbookobj in addressBookDictionary.Values)
+            {
+                CreateCityDictionary();
+                List<Contact> contactList = GetListOfDictionaryKeys(addressbookobj.cityDictionary);
+                foreach (Contact contact in contactList.FindAll(c => c.City.Equals(city)).ToList())
+                {
+                    Console.WriteLine(contact.ToString);
+                }
+            }
+        }
+
+         
+
+        public void CreateCityDictionary()
+        {
+            foreach(AddressBook addressBookObj in addressBookDictionary.Values)
+            {
+                foreach(Contact contact in addressBookObj.addressBook.Values)
+                {
+                    addressBookObj.cityDictionary.Add(contact, contact.City);
+                }
+                 
+            }
+        }
+  
+        public void SearchPersonByState(string state)
+        {
+            foreach (AddressBook addressbookobj in addressBookDictionary.Values)
+            {
+                CreateCityDictionary();
+                List<Contact> contactList = GetListOfDictionaryKeys(addressbookobj.stateDictionary);
+                foreach (Contact contact in contactList.FindAll(c => c.State.Equals(state)).ToList())
+                {
+                    Console.WriteLine(contact.ToString);
+                }
+            }
+        }
+        public void CreateStateDictionary()
+        {
+            foreach (AddressBook addressbookobj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in addressbookobj.addressBook.Values)
+                {
+                    addressbookobj.stateDictionary.Add(contact, contact.State);
+                }
+            }
+        }
+
+
+
+
     }
 }
